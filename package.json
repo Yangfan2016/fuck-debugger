@@ -1,0 +1,10 @@
+{
+  "name": "fuckdebugger",
+  "version": "1.0.0",
+  "description": "This is tool clear \"debugger\" and \"console\" of your files",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "walk": "^2.3.14"
+  }
+}
