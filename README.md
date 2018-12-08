@@ -11,14 +11,15 @@ $ npm install fuck-debugger
 ### Example
 Use Cli
 ```bash
-fd ./examples
+fd -s ./examples
+fd -s ./examples -x cshtml,html
 ```
 Use Api
 ```js
 const FuckDebugger = require('fuck-debugger');
 
 new FuckDebugger({
-    entry: path.resolve(ROOT_PATH, args[0]),
+    entry: "./examples",
     ext: ["cshtml", "html", "js"],
 });
 ```

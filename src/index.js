@@ -36,8 +36,8 @@ const yf = {
 
 class FuckDebugger {
     constructor(options) {
-        if (!options) throw new ReferenceError("We need param 'entry'");
-        if (!options.entry) throw new ReferenceError("We need param 'entry'");
+        if (!options) throw new TypeError("We need param 'entry'");
+        if (!options.entry) throw new TypeError("We need param 'entry'");
         let defaultConf = {
             ext: ["cshtml", "html", "js"],
         };

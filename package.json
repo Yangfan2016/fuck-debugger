@@ -11,6 +11,7 @@
     "revert": "git checkout -- ./examples/"
   },
   "dependencies": {
+    "commander": "^2.19.0",
     "walk": "^2.3.14"
   },
   "repository": {

@@ -1,11 +1,26 @@
 #!/usr/bin/env node
 const path = require("path");
 const FuckDebugger = require("../src/index");
+const program = require("commander");
+const fs = require("fs");
 
-var ROOT_PATH = process.env.PWD;
-var args = process.argv.slice(2);
+let pkg = fs.readFileSync(path.resolve(__dirname,"../package.json"), { encoding: "utf-8" });
+pkg = JSON.parse(pkg);
+
+program
+    .version(pkg.version, "-v, --version")
+    .option('-s, --source [value]', 'The directory path of your files')
+    .option('-x, --ext [value]', 'The extions of your files,ps: "html" or "cshtml,html,js" ', function (val) {
+        return val.split(",");
+    })
+    .parse(process.argv);
+
+if (typeof program.source !== "string") {
+    throw new TypeError("We need entry");
+}
+
 
 new FuckDebugger({
-    entry: path.resolve(ROOT_PATH, args[0]),
-    ext: ["cshtml", "html", "js"], // TODO
+    entry: path.resolve(process.env.PWD, program.source),
+    ext: program.ext,
 });
