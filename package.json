@@ -1,10 +1,21 @@
 {
-  "name": "fuckdebugger",
-  "version": "1.0.0",
+  "name": "fuck-debugger",
+  "version": "0.0.1",
   "description": "This is tool clear \"debugger\" and \"console\" of your files",
   "main": "src/index.js",
   "license": "MIT",
+  "bin": {
+    "fd": "./bin/fuck-debugger"
+  },
+  "scripts": {
+    "revert": "git checkout -- ./examples/"
+  },
   "dependencies": {
     "walk": "^2.3.14"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yangfan2016/fuck-debugger.git"
+  },
+  "author": "Yangfan"
 }

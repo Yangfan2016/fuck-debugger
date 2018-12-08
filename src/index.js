@@ -2,22 +2,42 @@ const path = require("path");
 const fs = require("fs");
 const walk = require("walk");
 
-/**
- * How to use
- *  new FuckDebugger({
- *      entry:"./examples",
- *      ext:"html", // or ["html","js"]
- *      output:"./output",
- *  });
- * 
- * 
- * 
- * 
- */
+// https://misc.flogisoft.com/bash/tip_colors_and_formatting
+const style = {
+    "Red": 31,
+    "Green": 32,
+    "Yellow": 33,
+    "Light red": 91,
+    "Light green": 92,
+    "Light yellow": 93,
+    "Light cyan": 96,
+};
+
+function logger(str, color) {
+    console.log(`\x1B[${style[color]}m${str}`);
+}
+const yf = {
+    log(str) {
+        logger(str, "Light green");
+    },
+    info(str) {
+        logger(str, "Light cyan");
+    },
+    warn(str) {
+        logger(str, "Light yellow");
+    },
+    error(str) {
+        logger(str, "Light red");
+    }
+};
+
+
+
+
 class FuckDebugger {
     constructor(options) {
-        if (!options) return;
-        if (!options.entry) return;
+        if (!options) throw new ReferenceError("We need param 'entry'");
+        if (!options.entry) throw new ReferenceError("We need param 'entry'");
         let defaultConf = {
             ext: ["cshtml", "html", "js"],
         };
@@ -25,21 +45,22 @@ class FuckDebugger {
 
         !(this.config.ext instanceof Array) ? this.config.ext = [this.config.ext] : 0;
 
-        this.init();
-    }
-    init() {
         this.flattenFile(this.config.entry);
     }
     flattenFile(input) {
         let walker = walk.walk(input);
-        this.files = [];
+        let files = [];
+        let startTime = 0;
+        let endTime = 0;
 
         walker.on('file', (root, stat, next) => {
+            yf.info("Reading...");
+            startTime = this.timeTravel();
             let fileName = stat.name;
-            let filePath = root + '/' + fileName;
+            let filePath = path.join(root, fileName);
             let extName = path.extname(fileName).slice(1); // .js -> js
             let isMatch = this.config.ext.includes(extName);
-            isMatch && this.files.push({
+            isMatch && files.push({
                 path: filePath,
                 name: fileName,
                 extName: extName,
@@ -47,40 +68,47 @@ class FuckDebugger {
             next();
         });
         walker.on('end', () => {
-            this.files.forEach(fileInfo => {
+            yf.info("Ok, Happy day");
+            files.map(fileInfo => {
                 fs.readFile(fileInfo.path, { encoding: 'utf-8' }, (err, data) => {
-                    if (!err) {
-                        if (data === "") {
-                            return;
-                        }
-                        let extName = fileInfo.extName;
-                        let isJsFile = extName === "js";
-                        if (isJsFile) {
-                            this.fuckJs(data);
-                        } else {
-                            this.fuckHtml(data);
-                        }
+                    if (err) { return yf.error(err); }
+                    if (data === "") {
+                        yf.warn("The file is empty");
+                        return;
                     }
+                    let extName = fileInfo.extName;
+                    let isJsFile = extName === "js";
+                    if (isJsFile) {
+                        fileInfo.data = this.fuckJs(data);
+                    } else {
+                        fileInfo.data = this.fuckHtml(data);
+                    }
+                    fs.writeFile(fileInfo.path, fileInfo.data, (err) => {
+                        if (!err) {
+                            endTime = this.timeTravel();
+                            yf.log(`${endTime - startTime}ms | ${fileInfo.path}`);
+                        }
+                    });
                 });
             });
-
         });
     }
     fuckJs(str) {
-        let debuReg = /\bdebugger\b;?/g;
-        let consoleReg=/console\.log(\([^)]*)\);?/g;
-        str=str.replace(debuReg,"").replace(consoleReg,"");
-        console.log(str);
+        let reg = /\bdebugger\b;?/g;
+        let consoleReg = /console\.log(\([^)]*)\);?/g;
+        str = str.replace(reg, "").replace(consoleReg, "");
+        return str;
     }
     fuckHtml(str) {
-        let scriptReg=/<script(\s[^>]*)?>([^<]+)<\/script>/g;
-        // TODO
+        let reg = /(?<=<script([^>]*)>)([^<]+)(?=<\/script>)/g;
+        str = str.replace(reg, (all) => {
+            return this.fuckJs(all);
+        });
+        return str;
+    }
+    timeTravel() {
+        return Date.now();
     }
 }
 
-
-new FuckDebugger({
-    entry: path.resolve(__dirname, "../examples"),
-    // ext: ["html","js"], // or ["html","js"]
-    // output: "./output",
-});
+module.exports = FuckDebugger;

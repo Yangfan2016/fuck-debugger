@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+const path = require("path");
+const FuckDebugger = require("../src/index");
+
+var ROOT_PATH = process.env.PWD;
+var args = process.argv.slice(2);
+
+new FuckDebugger({
+    entry: path.resolve(ROOT_PATH, args[0]),
+    ext: ["cshtml", "html", "js"], // TODO
+});

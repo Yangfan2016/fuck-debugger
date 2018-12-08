@@ -1,39 +1,3 @@
-## fuck-debugger 
-![NPM version](https://img.shields.io/npm/v/fuck-debugger.svg?style=flat)
-
-This is tool clear &quot;debugger&quot; and &quot;console&quot; of your files
-
-### Installation
-```bash
-$ npm install fuck-debugger
-```
-
-### Example
-Use Cli
-```bash
-fd ./examples
-```
-Use Api
-```js
-const FuckDebugger = require('fuck-debugger');
-
-new FuckDebugger({
-    entry: path.resolve(ROOT_PATH, args[0]),
-    ext: ["cshtml", "html", "js"],
-});
-```
-
-### Contributing
-- Fork this Repo first
-- Clone your Repo
-- Install dependencies by `$ npm install`
-- Checkout a feature branch
-- Feel free to add your features
-- Make sure your features are fully tested
-- Publish your local branch, Open a pull request
-- Enjoy hacking <3
-
-### MIT license
 Copyright (c) 2018 Yangfan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,6 +17,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
----
-built upon love by [docor](https://github.com/turingou/docor.git) v0.3.0
