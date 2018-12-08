@@ -1,6 +1,6 @@
 {
   "name": "fuck-debugger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is tool clear \"debugger\" and \"console\" of your files",
   "main": "src/index.js",
   "license": "MIT",
