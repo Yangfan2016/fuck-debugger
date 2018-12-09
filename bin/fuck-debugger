@@ -23,4 +23,4 @@ if (typeof program.source !== "string") {
 new FuckDebugger({
     entry: path.resolve(process.env.PWD, program.source),
     ext: program.ext,
-});
+}).fuckIt();

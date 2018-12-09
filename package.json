@@ -4,19 +4,26 @@
   "description": "This is tool clear \"debugger\" and \"console\" of your files",
   "main": "src/index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yangfan2016/fuck-debugger.git"
+  },
+  "author": "Yangfan",
   "bin": {
     "fd": "./bin/fuck-debugger"
   },
   "scripts": {
-    "revert": "git checkout -- ./examples/"
+    "revert": "git checkout -- ./examples/",
+    "test": "jest test/fuck-debugger.test.js --config ./jest.config.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "commander": "^2.19.0",
     "walk": "^2.3.14"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Yangfan2016/fuck-debugger.git"
-  },
-  "author": "Yangfan"
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0"
+  }
 }

@@ -1,42 +1,14 @@
 const path = require("path");
 const fs = require("fs");
 const walk = require("walk");
-
-// https://misc.flogisoft.com/bash/tip_colors_and_formatting
-const style = {
-    "Red": 31,
-    "Green": 32,
-    "Yellow": 33,
-    "Light red": 91,
-    "Light green": 92,
-    "Light yellow": 93,
-    "Light cyan": 96,
-};
-
-function logger(str, color) {
-    console.log(`\x1B[${style[color]}m${str}`);
-}
-const yf = {
-    log(str) {
-        logger(str, "Light green");
-    },
-    info(str) {
-        logger(str, "Light cyan");
-    },
-    warn(str) {
-        logger(str, "Light yellow");
-    },
-    error(str) {
-        logger(str, "Light red");
-    }
-};
-
-
-
+const color = require("./color");
 
 class FuckDebugger {
     constructor(options) {
-        if (!options) throw new TypeError("We need param 'entry'");
+        if (!options) {
+            color.error("An unexpected error ocurred");
+            throw new TypeError("We need param 'entry'");
+        }
         if (!options.entry) throw new TypeError("We need param 'entry'");
         let defaultConf = {
             ext: ["cshtml", "html", "js"],
@@ -44,7 +16,8 @@ class FuckDebugger {
         this.config = Object.assign({}, defaultConf, options);
 
         !(this.config.ext instanceof Array) ? this.config.ext = [this.config.ext] : 0;
-
+    }
+    fuckIt() {
         this.flattenFile(this.config.entry);
     }
     flattenFile(input) {
@@ -54,7 +27,7 @@ class FuckDebugger {
         let endTime = 0;
 
         walker.on('file', (root, stat, next) => {
-            yf.info("Reading...");
+            color.info("Reading...");
             startTime = this.timeTravel();
             let fileName = stat.name;
             let filePath = path.join(root, fileName);
@@ -68,12 +41,12 @@ class FuckDebugger {
             next();
         });
         walker.on('end', () => {
-            yf.info("Ok, Happy day");
+            color.info("Ok, Happy day");
             files.map(fileInfo => {
                 fs.readFile(fileInfo.path, { encoding: 'utf-8' }, (err, data) => {
-                    if (err) { return yf.error(err); }
+                    if (err) { return color.error(err); }
                     if (data === "") {
-                        yf.warn("The file is empty");
+                        color.warn("The file is empty");
                         return;
                     }
                     let extName = fileInfo.extName;
@@ -86,7 +59,7 @@ class FuckDebugger {
                     fs.writeFile(fileInfo.path, fileInfo.data, (err) => {
                         if (!err) {
                             endTime = this.timeTravel();
-                            yf.log(`${endTime - startTime}ms | ${fileInfo.path}`);
+                            color.log(`${endTime - startTime}ms | ${fileInfo.path}`);
                         }
                     });
                 });
