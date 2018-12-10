@@ -1,5 +1,5 @@
 ## fuck-debugger 
-![NPM version](https://img.shields.io/npm/v/fuck-debugger.svg?style=flat)
+[![NPM version](https://img.shields.io/npm/v/fuck-debugger.svg?style=flat)](https://www.npmjs.com/package/fuck-debugger)
 [![Build Status](https://travis-ci.org/Yangfan2016/fuck-debugger.svg?branch=master)](https://travis-ci.org/Yangfan2016/fuck-debugger)
 [![Coverage Status](https://coveralls.io/repos/github/Yangfan2016/fuck-debugger/badge.svg?branch=master)](https://coveralls.io/github/Yangfan2016/fuck-debugger?branch=master)
 
