@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.org/Yangfan2016/fuck-debugger.svg?branch=master)](https://travis-ci.org/Yangfan2016/fuck-debugger)
 [![Coverage Status](https://coveralls.io/repos/github/Yangfan2016/fuck-debugger/badge.svg?branch=master)](https://coveralls.io/github/Yangfan2016/fuck-debugger?branch=master)
 
-This is tool clear &quot;debugger&quot; and &quot;console&quot; of your files
+>This is a tiny tool to clear 'debugger' and 'console.log' of your files  
+
+去除代码中`debugger`和`console.log`，主要针对html文件 
 
 ### Installation
 ```bash

@@ -8,7 +8,7 @@ function readFile2Str(path) {
 }
 function takeJsFromScripTag(str) {
     let reg = /(?<=<script([^>]*)>)([^<]+)(?=<\/script>)/g;
-    let res=[];
+    let res = [];
     str.replace(reg, (all) => {
         res.push(all);
     });
@@ -53,7 +53,7 @@ describe("File type: js", () => {
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
@@ -63,7 +63,7 @@ describe("File type: js", () => {
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
 });
 describe("File type: html", () => {
@@ -75,24 +75,24 @@ describe("File type: html", () => {
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.html"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.html"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
 });
 describe("File type: cshtml", () => {
@@ -104,24 +104,24 @@ describe("File type: cshtml", () => {
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
 });
 describe("File type: cshtml", () => {
@@ -133,24 +133,24 @@ describe("File type: cshtml", () => {
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
 });
 describe("Default", () => {
@@ -161,67 +161,67 @@ describe("Default", () => {
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.cshtml"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.html"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.html"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No debugger", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.js"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/\bdebugger\b/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
     it("No console.log", (done) => {
         setTimeout(() => {
             let str = readFile2Str(path.resolve(__dirname, "../examples/index.js"));
-            str=takeJsFromScripTag(str);
+            str = takeJsFromScripTag(str);
             expect(str)
                 .to
                 .not
                 .match(/console\.log(\([^)]*)\);?/g);
             done();
-        }, 3e3);
+        }, 1e3);
     });
 });
