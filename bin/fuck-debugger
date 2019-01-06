@@ -2,10 +2,7 @@
 const path = require("path");
 const FuckDebugger = require("../src/index");
 const program = require("commander");
-const fs = require("fs");
-
-let pkg = fs.readFileSync(path.resolve(__dirname,"../package.json"), { encoding: "utf-8" });
-pkg = JSON.parse(pkg);
+const pkg=require("../package.json");
 
 program
     .version(pkg.version, "-v, --version")
